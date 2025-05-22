@@ -27,7 +27,7 @@ const orange = chalk.bold.hex("#FFA500");
 const lime = chalk.bold.hex("#32CD32");
 let useQR = false;
 let initialConnection = true;
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 8000;
 
 const MAIN_LOGGER = pino({
     timestamp: () => `,"time":"${new Date().toJSON()}"`
@@ -52,8 +52,8 @@ async function downloadSessionData() {
         console.error('Please add your session to SESSION_ID env !!');
         return false;
     }
-    const sessdata = config.SESSION_ID.split("DARK-SHADOW&")[1];
-    const url = `https://pastebin.com/raw/${sessdata}`;
+    const sessdata = config.SESSION_ID
+    const url = `https://mega.nz/file/${sessdata}`;
     try {
         const response = await axios.get(url);
         const data = typeof response.data === 'string' ? response.data : JSON.stringify(response.data);
@@ -76,7 +76,7 @@ async function start() {
             version,
             logger: pino({ level: 'silent' }),
             printQRInTerminal: useQR,
-            browser: ["DARK-SHADOW-MD", "safari", "3.3"],
+            browser: ["Firefox", "safari", "3.3"],
             auth: state,
             getMessage: async (key) => {
                 if (store) {
