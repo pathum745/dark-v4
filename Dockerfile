@@ -14,6 +14,6 @@ RUN npm install && npm install -g qrcode-terminal pm2
 
 COPY . .
 
-EXPOSE 3000
+EXPOSE 8000
 
 CMD ["npm", "start"]
